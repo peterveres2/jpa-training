@@ -19,7 +19,7 @@ public class XMLProcessorConfig {
 				put(JAXB_FORMATTED_OUTPUT, true);
 			}
 		});
-		jaxb2Marshaller.setPackagesToScan("com.epam.jpatraining.xmlprocessor.domain");
+		jaxb2Marshaller.setPackagesToScan("com.epam.jpatraining.xml.domain");
 		
 		return jaxb2Marshaller;
 	}

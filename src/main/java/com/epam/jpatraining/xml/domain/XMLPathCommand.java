@@ -1,4 +1,4 @@
-package com.epam.jpatraining.xmlprocessor.domain;
+package com.epam.jpatraining.xml.domain;
 
 import java.math.BigDecimal;
 

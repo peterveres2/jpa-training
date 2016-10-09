@@ -1,4 +1,4 @@
-package com.epam.jpatraining.xmlprocessor.dao;
+package com.epam.jpatraining.xml.dao;
 
 
 import java.io.IOException;
@@ -12,10 +12,10 @@ import org.springframework.oxm.Unmarshaller;
 import org.springframework.oxm.XmlMappingException;
 import org.springframework.stereotype.Component;
 
-import com.epam.jpatraining.xmlprocessor.domain.XMLCities;
+import com.epam.jpatraining.xml.domain.XMLCounties;
 
 @Component
-public class XMLCitiesDao {
+public class XMLCountiesDao {
 
 	@Autowired
 	private Marshaller marshaller;
@@ -24,12 +24,12 @@ public class XMLCitiesDao {
 	private Unmarshaller unmarshaller;
 
 	
-	public void write(XMLCities xmlCities, Result result) throws XmlMappingException, IOException {
+	public void write(XMLCounties xmlCities, Result result) throws XmlMappingException, IOException {
 		marshaller.marshal(xmlCities, result);
 	}
 
-	public XMLCities read(Source source) throws IOException {
-		return (XMLCities) unmarshaller.unmarshal(source);
+	public XMLCounties read(Source source) throws IOException {
+		return (XMLCounties) unmarshaller.unmarshal(source);
 	}
 	
 }
