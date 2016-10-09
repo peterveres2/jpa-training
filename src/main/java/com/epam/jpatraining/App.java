@@ -17,18 +17,7 @@ public class App {
 		try (AbstractApplicationContext context = new AnnotationConfigApplicationContext(
 				"com.epam.jpatraining.config")) {
 
-			
-//			DataSource dataSource = context.getBean(DataSource.class);
-//			
-//			Connection conn = dataSource.getConnection();
-//			Statement statement = conn.createStatement();
-//			
-//			
-//			ResultSet rs = statement.executeQuery("select * from test1");
-//			rs.next();
-//			System.out.println(rs.getString(1));
-			
-			 
+			System.out.println("App started.");
 			 
 		}
 

@@ -24,8 +24,8 @@ public class XMLCountiesDao {
 	private Unmarshaller unmarshaller;
 
 	
-	public void write(XMLCounties xmlCities, Result result) throws XmlMappingException, IOException {
-		marshaller.marshal(xmlCities, result);
+	public void write(XMLCounties xmlCounties, Result result) throws XmlMappingException, IOException {
+		marshaller.marshal(xmlCounties, result);
 	}
 
 	public XMLCounties read(Source source) throws IOException {

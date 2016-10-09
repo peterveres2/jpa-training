@@ -16811,7 +16811,7 @@
     <county>
         <id>HU-TO</id>
         <name>Tolna</name>
-        <seat></seat>
+        <seat>Szekszárd</seat>
         <color>FFD3CEA4</color>
         <population>223618</population>
         <size>3703</size>
@@ -17719,7 +17719,7 @@
     <county>
         <id>HU-VA</id>
         <name>Vas</name>
-        <seat></seat>
+        <seat>Szombathely</seat>
         <color>FF014F08</color>
         <population>253689</population>
         <size>3336</size>
