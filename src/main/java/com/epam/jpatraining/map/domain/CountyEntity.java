@@ -7,6 +7,8 @@ import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -16,7 +18,12 @@ public class CountyEntity implements Auditable {
 
 
 	@Id
-	private String id;
+	@GeneratedValue
+	private long id;
+	
+	@Column(nullable = false)
+	private String origId;
+	
 	
 	@Column(nullable = false)	
 	private String name;
@@ -33,19 +40,26 @@ public class CountyEntity implements Auditable {
 	@Column(nullable = false)
 	private int size;
 
-	@OneToMany(cascade = CascadeType.PERSIST)
+	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	private List<PathCommandEntity> pathCommands;
 	
 	@Embedded
 	private Audit audit = new Audit();
-	
-	
-	public String getId() {
+
+	public long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(long id) {
 		this.id = id;
+	}
+
+	public String getOrigId() {
+		return origId;
+	}
+
+	public void setOrigId(String origId) {
+		this.origId = origId;
 	}
 
 	public String getName() {

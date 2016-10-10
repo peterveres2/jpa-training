@@ -7,6 +7,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.oxm.XmlMappingException;
 
+import com.epam.jpatraining.map.domain.CountyEntity;
 import com.epam.jpatraining.map.service.MapService;
 
 /**
@@ -22,6 +23,12 @@ public class App {
 			MapService mapService = context.getBean(MapService.class);
 			
 			mapService.importData();
+			
+			
+			CountyEntity bp = mapService.findById(1021);
+			
+			System.out.println("Number of path commands: " + bp.getPathCommands().size());
+			
 		}
 
 	}

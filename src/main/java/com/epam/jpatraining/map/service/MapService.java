@@ -49,6 +49,9 @@ public class MapService {
 			}
 	}
 
+	public CountyEntity findById(long id) {
+		return countyDao.find(id);
+	}
 
 	private void createPathCommand(List<PathCommandEntity> pathCommands, XMLPathCommand xmlPathCommand) {
 		PathCommandEntity pathCommand = new PathCommandEntity();
@@ -62,7 +65,7 @@ public class MapService {
 	private CountyEntity createCounty(XMLCounty xmlCounty) {
 		CountyEntity county = new CountyEntity();
 		
-		county.setId(xmlCounty.getId());
+		county.setOrigId(xmlCounty.getId());
 		county.setName(xmlCounty.getName());
 		county.setSeat(xmlCounty.getSeat());
 		county.setColor(xmlCounty.getColor());
