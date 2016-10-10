@@ -24,11 +24,13 @@ public class App {
 			
 			mapService.importData();
 			
-			
-			CountyEntity bp = mapService.findById(1021);
+			CountyEntity bp = mapService.findById(4);
 			
 			System.out.println("Full name: " + bp.getFullName());
 			System.out.println("Number of path commands: " + bp.getPathCommands().size());
+			System.out.println("Find by name: " + mapService.findCountyByOrigIdOrName("Budapest").getName());
+			System.out.println("Find by max size: " + mapService.findLargestCounty());
+			System.out.println("Statistics: " + mapService.getStatistics());
 			
 		}
 

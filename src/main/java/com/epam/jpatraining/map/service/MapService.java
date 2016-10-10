@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.NoResultException;
 import javax.xml.transform.stream.StreamSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.epam.jpatraining.map.dao.CountyDao;
 import com.epam.jpatraining.map.domain.CountyEntity;
 import com.epam.jpatraining.map.domain.PathCommandEntity;
+import com.epam.jpatraining.map.domain.Statistics;
 import com.epam.jpatraining.xml.dao.XMLCountiesDao;
 import com.epam.jpatraining.xml.domain.XMLCounties;
 import com.epam.jpatraining.xml.domain.XMLCounty;
@@ -44,7 +46,7 @@ public class MapService {
 				createPathCommand(pathCommands, xmlPathCommand);
 			});
 			
-			county.setPathCommands(pathCommands);
+			//county.setPathCommands(pathCommands);
 			countyDao.save(county);
 			}
 	}
@@ -53,6 +55,26 @@ public class MapService {
 		return countyDao.find(id);
 	}
 
+	
+	@Transactional
+	public CountyEntity findCountyByOrigIdOrName(String name) {
+		try {			
+			return countyDao.findByOrigId(name);
+		}
+		catch (NoResultException nre) {
+			return countyDao.findByName(name);
+		}
+	}
+	
+	public Integer findLargestCounty() {
+		return countyDao.findLargestCountySize();
+	}
+		
+		
+	public Statistics getStatistics() {
+		return countyDao.getStatistics();
+	}
+	
 	private void createPathCommand(List<PathCommandEntity> pathCommands, XMLPathCommand xmlPathCommand) {
 		PathCommandEntity pathCommand = new PathCommandEntity();
 		pathCommand.setType(xmlPathCommand.getType());
@@ -60,6 +82,8 @@ public class MapService {
 		pathCommand.setPositionY(xmlPathCommand.getPositionY());
 		pathCommands.add(pathCommand);
 	}
+	
+	
 
 
 	private CountyEntity createCounty(XMLCounty xmlCounty) {
@@ -73,6 +97,9 @@ public class MapService {
 		county.setSize(xmlCounty.getSize());
 		return county;
 	}
+	
+	
+	
 
 
 }
