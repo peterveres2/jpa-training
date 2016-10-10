@@ -27,6 +27,7 @@ public class App {
 			
 			CountyEntity bp = mapService.findById(1021);
 			
+			System.out.println("Full name: " + bp.getFullName());
 			System.out.println("Number of path commands: " + bp.getPathCommands().size());
 			
 		}

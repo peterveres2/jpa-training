@@ -11,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 @Entity(name = "county")
 @EntityListeners(AuditListener.class)
@@ -40,6 +41,9 @@ public class CountyEntity implements Auditable {
 	@Column(nullable = false)
 	private int size;
 
+	@Transient
+	private String fullName;
+	
 	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	private List<PathCommandEntity> pathCommands;
 	
@@ -117,6 +121,14 @@ public class CountyEntity implements Auditable {
 	public void setAudit(Audit audit) {
 		this.audit = audit;
 	}
+
+	public String getFullName() {
+		if (fullName == null) {
+			fullName = String.format("%s, %s, %s", id, origId, name); 
+		}
+		return fullName;
+	}
+	
 	
 	
 }
