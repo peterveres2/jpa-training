@@ -7,7 +7,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.oxm.XmlMappingException;
 
-import com.epam.jpatraining.map.service.MapImportService;
+import com.epam.jpatraining.map.service.MapService;
 
 /**
  * Map creator application
@@ -19,11 +19,9 @@ public class App {
 		try (AbstractApplicationContext context = new AnnotationConfigApplicationContext(
 				"com.epam.jpatraining.config")) {
 
+			MapService mapService = context.getBean(MapService.class);
 			
-			MapImportService mapImportService = context.getBean(MapImportService.class);
-			
-			mapImportService.importData();
-			 
+			mapService.importData();
 		}
 
 	}

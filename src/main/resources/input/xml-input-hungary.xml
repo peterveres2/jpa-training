@@ -12066,8 +12066,8 @@
         <name>Nógrád</name>
         <seat>Salgótartján</seat>
         <color>FFAAE9B3</color>
-        <population>2544</population>
-        <size>193946</size>
+        <population>193946</population>
+        <size>2544</size>
         <command>
             <positionX>319.2</positionX>
             <positionY>47.07</positionY>

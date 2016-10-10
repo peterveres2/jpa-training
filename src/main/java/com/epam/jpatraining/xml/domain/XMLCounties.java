@@ -12,7 +12,7 @@ public class XMLCounties {
     private List<XMLCounty> counties = new LinkedList<>();
 
     @XmlElement(name = "county")
-	public List<XMLCounty> getCounty() {
+	public List<XMLCounty> getCounties() {
 		return counties;
 	}
 
