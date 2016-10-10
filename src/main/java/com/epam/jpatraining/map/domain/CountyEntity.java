@@ -23,7 +23,7 @@ public class CountyEntity implements Auditable {
 	@GeneratedValue
 	private long id;
 	
-	//@Version
+	@Version
 	private Integer version;
 	
 	

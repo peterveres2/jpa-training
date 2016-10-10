@@ -5,11 +5,13 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import com.epam.jpatraining.map.domain.CountyEntity;
 import com.epam.jpatraining.map.domain.Statistics;
 
 @Component
+@Repository
 public class CountyDao {
 
 	@PersistenceContext
