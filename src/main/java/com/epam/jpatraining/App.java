@@ -17,22 +17,32 @@ import com.epam.jpatraining.map.service.MapService;
 public class App {
 
 	public static void main(String[] args) throws XmlMappingException, IOException, SQLException {
-		try (AbstractApplicationContext context = new AnnotationConfigApplicationContext(
-				"com.epam.jpatraining.config")) {
-
-			MapService mapService = context.getBean(MapService.class);
-			
-			mapService.importData();
-			
-			CountyEntity bp = mapService.findById(4);
-			
-			System.out.println("Full name: " + bp.getFullName());
-			System.out.println("Number of path commands: " + bp.getPathCommands().size());
-			System.out.println("Find by name: " + mapService.findCountyByOrigIdOrName("Budapest").getName());
-			System.out.println("Find by max size: " + mapService.findLargestCounty());
-			System.out.println("Statistics: " + mapService.getStatistics());
-			
-		}
-
+		Runnable task = () -> {
+			try (AbstractApplicationContext context = new AnnotationConfigApplicationContext(
+					"com.epam.jpatraining.config")) {
+	
+				MapService mapService = context.getBean(MapService.class);
+	
+				// mapService.importData();
+	
+				CountyEntity bp = mapService.findCountyByOrigIdOrName("Budapest");
+				bp.setPopulation(bp.getPopulation() + 10);
+				mapService.update(bp);
+				
+				// System.out.println("Full name: " + bp.getFullName());
+				// System.out.println("Number of path commands: " +
+				// bp.getPathCommands().size());
+				// System.out.println("Find by name: " +
+				// mapService.findCountyByOrigIdOrName("Budapest").getName());
+				// System.out.println("Find by max size: " +
+				// mapService.findLargestCounty());
+				// System.out.println("Statistics: " + mapService.getStatistics());
+			}
+		};
+		
+		new Thread(task).start();
+		new Thread(task).start();
+		
 	}
+
 }

@@ -23,6 +23,10 @@ public class CountyDao {
 		return entityManager.find(CountyEntity.class, id);
 	}
 	
+	public void update(CountyEntity countyEntity) {
+		entityManager.merge(countyEntity);
+	}
+	
 	public CountyEntity findByName(String name) {
 		TypedQuery<CountyEntity> query = entityManager.createQuery("select c from county c where c.name = :name", CountyEntity.class);
 		query.setParameter("name", name);

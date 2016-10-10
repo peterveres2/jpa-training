@@ -12,9 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.epam.jpatraining.common.SVGPathCommandType;
 import com.epam.jpatraining.map.dao.CountyDao;
 import com.epam.jpatraining.map.domain.CountyEntity;
 import com.epam.jpatraining.map.domain.PathCommandEntity;
+import com.epam.jpatraining.map.domain.PathCommandLineEntity;
+import com.epam.jpatraining.map.domain.PathCommandMoveEntity;
 import com.epam.jpatraining.map.domain.Statistics;
 import com.epam.jpatraining.xml.dao.XMLCountiesDao;
 import com.epam.jpatraining.xml.domain.XMLCounties;
@@ -46,7 +49,7 @@ public class MapService {
 				createPathCommand(pathCommands, xmlPathCommand);
 			});
 			
-			//county.setPathCommands(pathCommands);
+			county.setPathCommands(pathCommands);
 			countyDao.save(county);
 			}
 	}
@@ -58,7 +61,7 @@ public class MapService {
 	
 	@Transactional
 	public CountyEntity findCountyByOrigIdOrName(String name) {
-		try {			
+		try {
 			return countyDao.findByOrigId(name);
 		}
 		catch (NoResultException nre) {
@@ -70,14 +73,31 @@ public class MapService {
 		return countyDao.findLargestCountySize();
 	}
 		
-		
+	@Transactional
+	public void update(CountyEntity countyEntity) {
+		countyDao.update(countyEntity);
+	}
+	
 	public Statistics getStatistics() {
 		return countyDao.getStatistics();
 	}
 	
 	private void createPathCommand(List<PathCommandEntity> pathCommands, XMLPathCommand xmlPathCommand) {
-		PathCommandEntity pathCommand = new PathCommandEntity();
-		pathCommand.setType(xmlPathCommand.getType());
+		SVGPathCommandType pathCommandType = xmlPathCommand.getType();
+		
+		PathCommandEntity pathCommand;
+		
+		if (pathCommandType == SVGPathCommandType.L) {
+			pathCommand = new PathCommandLineEntity();
+		}
+		else if (pathCommandType == SVGPathCommandType.l) {
+			pathCommand = new PathCommandLineEntity();
+			((PathCommandLineEntity)pathCommand).setRelative(true);
+		}
+		else {
+			pathCommand = new PathCommandMoveEntity();
+		}
+		//pathCommand.setType(xmlPathCommand.getType());
 		pathCommand.setPositionX(xmlPathCommand.getPositionX());
 		pathCommand.setPositionY(xmlPathCommand.getPositionY());
 		pathCommands.add(pathCommand);

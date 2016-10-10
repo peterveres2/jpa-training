@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
+import javax.persistence.Version;
 
 @Entity(name = "county")
 @EntityListeners(AuditListener.class)
@@ -21,6 +22,10 @@ public class CountyEntity implements Auditable {
 	@Id
 	@GeneratedValue
 	private long id;
+	
+	//@Version
+	private Integer version;
+	
 	
 	@Column(nullable = false)
 	private String origId;
@@ -120,6 +125,15 @@ public class CountyEntity implements Auditable {
 
 	public void setAudit(Audit audit) {
 		this.audit = audit;
+	}
+
+	
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
 	}
 
 	public String getFullName() {

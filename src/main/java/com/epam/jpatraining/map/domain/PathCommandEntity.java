@@ -3,28 +3,30 @@ package com.epam.jpatraining.map.domain;
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
-import com.epam.jpatraining.common.SVGPathCommandType;
 
-@Entity(name = "pathCommand")
+@Entity
 @EntityListeners(AuditListener.class)
-public class PathCommandEntity implements Auditable {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@DiscriminatorColumn(name = "command_type")
+public abstract class PathCommandEntity implements Auditable {
 
 	@Id
 	@GeneratedValue
 	private long id;
 	
 	
-	@Enumerated(EnumType.STRING)
-	@Column(nullable = false)
-	private SVGPathCommandType type;
+//	@Enumerated(EnumType.STRING)
+//	@Column(nullable = false)
+//	private SVGPathCommandType type;
 	
 	@Column(nullable = false)
 	private BigDecimal positionX;
@@ -41,12 +43,12 @@ public class PathCommandEntity implements Auditable {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public SVGPathCommandType getType() {
-		return type;
-	}
-	public void setType(SVGPathCommandType type) {
-		this.type = type;
-	}
+//	public SVGPathCommandType getType() {
+//		return type;
+//	}
+//	public void setType(SVGPathCommandType type) {
+//		this.type = type;
+//	}
 	public BigDecimal getPositionX() {
 		return positionX;
 	}
