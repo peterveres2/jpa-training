@@ -3,7 +3,9 @@ package com.epam.jpatraining.map.domain;
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
@@ -12,7 +14,8 @@ import javax.persistence.Id;
 import com.epam.jpatraining.common.SVGPathCommandType;
 
 @Entity(name = "pathCommand")
-public class PathCommandEntity {
+@EntityListeners(AuditListener.class)
+public class PathCommandEntity implements Auditable {
 
 	@Id
 	@GeneratedValue
@@ -29,6 +32,8 @@ public class PathCommandEntity {
 	@Column(nullable = false)
 	private BigDecimal positionY;
 
+	@Embedded
+	private Audit audit = new Audit();
 	
 	public long getId() {
 		return id;
@@ -53,6 +58,12 @@ public class PathCommandEntity {
 	}
 	public void setPositionY(BigDecimal positionY) {
 		this.positionY = positionY;
+	}
+	public Audit getAudit() {
+		return audit;
+	}
+	public void setAudit(Audit audit) {
+		this.audit = audit;
 	}
 	
 	

@@ -17,6 +17,7 @@ import com.epam.jpatraining.map.domain.PathCommandEntity;
 import com.epam.jpatraining.xml.dao.XMLCountiesDao;
 import com.epam.jpatraining.xml.domain.XMLCounties;
 import com.epam.jpatraining.xml.domain.XMLCounty;
+import com.epam.jpatraining.xml.domain.XMLPathCommand;
 
 @Component
 public class MapService {
@@ -40,16 +41,21 @@ public class MapService {
 			List<PathCommandEntity> pathCommands = new LinkedList<>();
 			
 			xmlCounty.getPathCommands().forEach(xmlPathCommand -> {
-				PathCommandEntity pathCommand = new PathCommandEntity();
-				pathCommand.setType(xmlPathCommand.getType());
-				pathCommand.setPositionX(xmlPathCommand.getPositionX());
-				pathCommand.setPositionY(xmlPathCommand.getPositionY());
-				pathCommands.add(pathCommand);
+				createPathCommand(pathCommands, xmlPathCommand);
 			});
 			
 			county.setPathCommands(pathCommands);
 			countyDao.save(county);
 			}
+	}
+
+
+	private void createPathCommand(List<PathCommandEntity> pathCommands, XMLPathCommand xmlPathCommand) {
+		PathCommandEntity pathCommand = new PathCommandEntity();
+		pathCommand.setType(xmlPathCommand.getType());
+		pathCommand.setPositionX(xmlPathCommand.getPositionX());
+		pathCommand.setPositionY(xmlPathCommand.getPositionY());
+		pathCommands.add(pathCommand);
 	}
 
 

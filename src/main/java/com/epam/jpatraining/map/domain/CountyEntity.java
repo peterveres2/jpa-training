@@ -4,12 +4,15 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity(name = "county")
-public class CountyEntity {
+@EntityListeners(AuditListener.class)
+public class CountyEntity implements Auditable {
 
 
 	@Id
@@ -32,6 +35,10 @@ public class CountyEntity {
 
 	@OneToMany(cascade = CascadeType.PERSIST)
 	private List<PathCommandEntity> pathCommands;
+	
+	@Embedded
+	private Audit audit = new Audit();
+	
 	
 	public String getId() {
 		return id;
@@ -88,8 +95,14 @@ public class CountyEntity {
 	public void setPathCommands(List<PathCommandEntity> pathCommands) {
 		this.pathCommands = pathCommands;
 	}
-	
-	
+
+	public Audit getAudit() {
+		return audit;
+	}
+
+	public void setAudit(Audit audit) {
+		this.audit = audit;
+	}
 	
 	
 }
