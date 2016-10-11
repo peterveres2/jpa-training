@@ -1,5 +1,7 @@
 package com.epam.jpatraining.map.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -15,7 +17,7 @@ import com.epam.jpatraining.map.domain.Statistics;
 public class CountyDao {
 
 	@PersistenceContext
-	EntityManager entityManager;
+	private EntityManager entityManager;
 	
 	public void save(CountyEntity county) {
 		entityManager.persist(county);
@@ -44,6 +46,11 @@ public class CountyDao {
 	public Integer findLargestCountySize() {
 		TypedQuery<Integer> query = entityManager.createQuery("select max(c.size) from county c", Integer.class);
 		return query.getSingleResult();
+	}
+	
+	public List<CountyEntity> findAll() {
+		TypedQuery<CountyEntity> query = entityManager.createQuery("from county c", CountyEntity.class);
+		return query.getResultList();
 	}
 	
 	public Statistics getStatistics() {

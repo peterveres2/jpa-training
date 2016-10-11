@@ -16,6 +16,11 @@ public class PathCommandLineEntity extends PathCommandEntity {
 	public void setRelative(boolean relative) {
 		this.relative = relative;
 	}
+
+	@Override
+	public String toString() {
+		return (relative ? "l" : "L") + getPositionX() + "," + getPositionY();
+	}
 	
 	
 }

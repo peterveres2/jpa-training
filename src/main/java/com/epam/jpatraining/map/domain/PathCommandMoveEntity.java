@@ -7,4 +7,9 @@ import javax.persistence.Entity;
 @Entity(name = "pathCommandMove")
 public class PathCommandMoveEntity extends PathCommandEntity {
 
+	@Override
+	public String toString() {
+		return "M" + getPositionX() + " " + getPositionY();
+	}
+	
 }

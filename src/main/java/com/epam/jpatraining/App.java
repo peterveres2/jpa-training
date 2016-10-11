@@ -10,13 +10,15 @@ import org.springframework.oxm.XmlMappingException;
 import com.epam.jpatraining.map.domain.CountyEntity;
 import com.epam.jpatraining.map.service.MapService;
 
+import freemarker.template.TemplateException;
+
 /**
  * Map creator application
  *
  */
 public class App {
 
-	public static void main(String[] args) throws XmlMappingException, IOException, SQLException {
+	public static void main(String[] args) throws XmlMappingException, IOException, SQLException, TemplateException {
 		try (AbstractApplicationContext context = new AnnotationConfigApplicationContext(
 				"com.epam.jpatraining.config")) {
 
@@ -24,9 +26,10 @@ public class App {
 
 			// mapService.importData();
 
-			CountyEntity bp = mapService.findCountyByOrigIdOrName("Budapest2");
-			bp.setPopulation(bp.getPopulation() + 10);
-			mapService.update(bp);
+			mapService.createMap();
+//			CountyEntity bp = mapService.findCountyByOrigIdOrName("Budapest");
+//			bp.setPopulation(bp.getPopulation() + 10);
+//			mapService.update(bp);
 			
 			// System.out.println("Full name: " + bp.getFullName());
 			// System.out.println("Number of path commands: " +

@@ -1,9 +1,13 @@
 package com.epam.jpatraining.map.service;
 
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.NoResultException;
 import javax.xml.transform.stream.StreamSource;
@@ -24,6 +28,10 @@ import com.epam.jpatraining.xml.domain.XMLCounties;
 import com.epam.jpatraining.xml.domain.XMLCounty;
 import com.epam.jpatraining.xml.domain.XMLPathCommand;
 
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+import freemarker.template.TemplateException;
+
 @Component
 public class MapService {
 
@@ -33,7 +41,9 @@ public class MapService {
 	@Autowired
 	CountyDao countyDao;
 
-
+	@Autowired
+	TemplateService templateService;
+	
 	@Transactional
 	public void importData() throws IOException, SQLException {
 		StreamSource source = new StreamSource(MapService.class.getResourceAsStream("/input/xml-input-hungary.xml"));
@@ -82,6 +92,27 @@ public class MapService {
 		return countyDao.getStatistics();
 	}
 	
+	
+	public void createMap() throws IOException, TemplateException {
+		List<CountyEntity> counties = countyDao.findAll();
+		
+		List<String> coordinates = new LinkedList<>();
+		counties.forEach(county -> {
+			StringBuffer command = new StringBuffer();
+			county.getPathCommands().forEach(pathCommand -> {
+				command.append(pathCommand.toString()).append(" ");
+			});
+			command.append("z");
+			coordinates.add(command.toString());			
+		});
+		
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("coordinates", coordinates);
+
+		templateService.create(new FileWriter("../map.svg"), "map-template.xml", data);
+		
+		
+	}
 	private void createPathCommand(List<PathCommandEntity> pathCommands, XMLPathCommand xmlPathCommand) {
 		SVGPathCommandType pathCommandType = xmlPathCommand.getType();
 		
@@ -102,6 +133,8 @@ public class MapService {
 		pathCommand.setPositionY(xmlPathCommand.getPositionY());
 		pathCommands.add(pathCommand);
 	}
+	
+	
 	
 	
 
