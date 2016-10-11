@@ -7,7 +7,6 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.oxm.XmlMappingException;
 
-import com.epam.jpatraining.map.domain.CountyEntity;
 import com.epam.jpatraining.map.service.MapService;
 
 import freemarker.template.TemplateException;
@@ -24,7 +23,7 @@ public class App {
 
 			MapService mapService = context.getBean(MapService.class);
 
-			// mapService.importData();
+			mapService.importData();
 
 			mapService.createMap();
 //			CountyEntity bp = mapService.findCountyByOrigIdOrName("Budapest");

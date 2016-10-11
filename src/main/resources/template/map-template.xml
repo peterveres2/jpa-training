@@ -16,7 +16,7 @@
 
 	</defs>
 	<g>
-		<#list coordinates as coordinate> 
+		<#list coordinates as coordinate>
 			<path class="land" d="${coordinate}"/>
 		</#list>
 	</g>

@@ -19,7 +19,7 @@ public class PathCommandLineEntity extends PathCommandEntity {
 
 	@Override
 	public String toString() {
-		return (relative ? "l" : "L") + getPositionX() + "," + getPositionY();
+		return (relative ? "l" : "L") + " " + getPositionX() + " " + getPositionY();
 	}
 	
 	

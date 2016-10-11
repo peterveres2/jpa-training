@@ -2,7 +2,6 @@ package com.epam.jpatraining.map.service;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Writer;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -28,8 +27,6 @@ import com.epam.jpatraining.xml.domain.XMLCounties;
 import com.epam.jpatraining.xml.domain.XMLCounty;
 import com.epam.jpatraining.xml.domain.XMLPathCommand;
 
-import freemarker.template.Configuration;
-import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
 @Component
@@ -102,7 +99,7 @@ public class MapService {
 			county.getPathCommands().forEach(pathCommand -> {
 				command.append(pathCommand.toString()).append(" ");
 			});
-			command.append("z");
+			//command.append("z");
 			coordinates.add(command.toString());			
 		});
 		

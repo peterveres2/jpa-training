@@ -46,12 +46,7 @@ public class CountyDao {
 	public Integer findLargestCountySize() {
 		TypedQuery<Integer> query = entityManager.createQuery("select max(c.size) from county c", Integer.class);
 		return query.getSingleResult();
-	}
-	
-	public List<CountyEntity> findAll() {
-		TypedQuery<CountyEntity> query = entityManager.createQuery("from county c", CountyEntity.class);
-		return query.getResultList();
-	}
+	}	
 	
 	public Statistics getStatistics() {
 		TypedQuery<Statistics> query = entityManager.createQuery("select "
@@ -60,5 +55,9 @@ public class CountyDao {
 		return query.getSingleResult();
 	}
 	
+	public List<CountyEntity> findAll() {
+		TypedQuery<CountyEntity> query = entityManager.createQuery("from county c", CountyEntity.class);
+		return query.getResultList();
+	}
 	
 }
