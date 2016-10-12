@@ -1,55 +1,48 @@
 package com.epam.jpatraining.map.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.epam.jpatraining.map.dao.CountyDao;
 import com.epam.jpatraining.map.domain.CountyEntity;
 import com.epam.jpatraining.map.domain.Statistics;
+import com.epam.jpatraining.map.repository.CountyRepository;
 
 @Component
 public class CountryService {
 
 	@Autowired
-	CountyDao countyDao;
+	CountyRepository countyRepository;
 
 	public CountyEntity findById(long id) {
-		return countyDao.find(id);
+		return countyRepository.findOne(id);
 	}
 
 	
 	@Transactional
 	public CountyEntity findCountyByOrigIdOrName(String name) {
-		CountyEntity countyEntity = countyDao.findByOrigId(name);
+		CountyEntity countyEntity = countyRepository.findByOrigId(name);
 		if (countyEntity == null) {			
-			countyEntity = countyDao.findByName(name);
+			countyEntity = countyRepository.findByName(name);
 		}
 		return countyEntity;
 	}
 	
 	public Integer findLargestCounty() {
-		return countyDao.findLargestCountySize();
+		return countyRepository.findLargestCountySize();
 	}
 		
 	@Transactional
-	public void update(CountyEntity countyEntity) {
-		countyDao.update(countyEntity);
+	public void save(CountyEntity countyEntity) {
+		countyRepository.save(countyEntity);
 	}
 	
-	@Transactional
-	public void create(CountyEntity countyEntity) {
-		countyDao.create(countyEntity);
-	}
-	
-	public List<CountyEntity> findAll() {
-		return countyDao.findAll();
+	public Iterable<CountyEntity> findAll() {
+		return countyRepository.findAll();
 	}
 	
 	public Statistics getStatistics() {
-		return countyDao.getStatistics();
+		return countyRepository.getStatistics();
 	}
 	
 	

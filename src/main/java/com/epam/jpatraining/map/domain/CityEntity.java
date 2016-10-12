@@ -7,8 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Version;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-
 @Entity(name = "city")
 
 public class CityEntity {
@@ -17,7 +15,7 @@ public class CityEntity {
 	@GeneratedValue
 	private long id;
 	
-	@Version
+	@Version	
 	private Integer version;
 	
 	@Column(nullable = false)	

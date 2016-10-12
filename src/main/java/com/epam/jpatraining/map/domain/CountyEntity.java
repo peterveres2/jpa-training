@@ -116,12 +116,12 @@ public class CountyEntity implements Auditable {
 		this.audit = audit;
 	}
 
-	
-	public int getVersion() {
+
+	public Integer getVersion() {
 		return version;
 	}
 
-	public void setVersion(int version) {
+	public void setVersion(Integer version) {
 		this.version = version;
 	}
 

@@ -11,8 +11,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.epam.jpatraining.map.dao.CountyDao;
 import com.epam.jpatraining.map.domain.CountyEntity;
+import com.epam.jpatraining.map.repository.CountyRepository;
 import com.epam.jpatraining.map.service.CountryService;
 
 
@@ -23,19 +23,21 @@ public class CountryServiceTest {
 	private CountryService underTest;
 	
 	@Mock
-	private CountyDao countyDao;
+	private CountyRepository countyRepository;
 
 	@Test
 	public void findAllShouldReturnAllCounties() {
 		// Given
 		List<CountyEntity> actual = new LinkedList<>();
-		BDDMockito.given(countyDao.findAll()).willReturn(actual);
+		BDDMockito.given(countyRepository.findAll()).willReturn(actual);
 		
 		// When
-		List<CountyEntity> result = underTest.findAll();
+		Iterable<CountyEntity> result = underTest.findAll();
 
 		// Then
 		Assert.assertEquals(result, actual);
-		BDDMockito.then(countyDao).should(BDDMockito.times(1)).findAll();
+		BDDMockito.then(countyRepository).should(BDDMockito.times(1)).findAll();
 	}
+	
+	
 }
