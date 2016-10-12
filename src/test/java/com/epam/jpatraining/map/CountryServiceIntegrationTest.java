@@ -7,12 +7,16 @@ import javax.persistence.PersistenceContext;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
 import com.epam.jpatraining.AbstractIntegrationTest;
 import com.epam.jpatraining.map.domain.CountyEntity;
 import com.epam.jpatraining.map.domain.Statistics;
 import com.epam.jpatraining.map.service.CountryService;
 import com.google.common.collect.Iterables;
+
+import ch.qos.logback.classic.net.SyslogAppender;
 
 public class CountryServiceIntegrationTest extends AbstractIntegrationTest {
 
@@ -63,5 +67,15 @@ public class CountryServiceIntegrationTest extends AbstractIntegrationTest {
 		// Then
 		System.out.println(statistics);
 	}
+	
+	@Test
+	public void testFindAllWithPageAble() {
+		PageRequest request =
+	            new PageRequest(2, 5, Sort.Direction.ASC, "name"); 
+		Iterable<CountyEntity> result = countryService.findAll(request);
+		
+		result.forEach(county -> System.out.println(county));
+	}
+	
 	
 }

@@ -1,6 +1,8 @@
 package com.epam.jpatraining.map.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,9 +39,16 @@ public class CountryService {
 		countyRepository.save(countyEntity);
 	}
 	
+
+	
+	public Iterable<CountyEntity> findAll(Pageable pageable) {
+		return countyRepository.findAll(pageable);
+	}
+
 	public Iterable<CountyEntity> findAll() {
 		return countyRepository.findAll();
 	}
+
 	
 	public Statistics getStatistics() {
 		return countyRepository.getStatistics();

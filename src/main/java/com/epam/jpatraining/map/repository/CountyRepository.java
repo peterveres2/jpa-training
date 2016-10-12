@@ -2,11 +2,12 @@ package com.epam.jpatraining.map.repository;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.epam.jpatraining.map.domain.CountyEntity;
 import com.epam.jpatraining.map.domain.Statistics;
 
-public interface CountyRepository extends CrudRepository<CountyEntity, Long>{
+public interface CountyRepository extends PagingAndSortingRepository<CountyEntity, Long>{
 
 	CountyEntity findByName(String name);
 

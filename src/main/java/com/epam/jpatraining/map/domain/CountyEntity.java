@@ -221,6 +221,11 @@ public class CountyEntity implements Auditable {
 		}
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "CountyEntity [fullName=" + getFullName() + "]";
+	}
 	
 	
 	
