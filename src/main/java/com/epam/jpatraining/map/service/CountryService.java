@@ -1,7 +1,6 @@
 package com.epam.jpatraining.map.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,7 +35,7 @@ public class CountryService {
 		
 	@Transactional
 	public void save(CountyEntity countyEntity) {
-		countyRepository.save(countyEntity);
+		countyRepository.saveAndFlush(countyEntity);
 	}
 	
 
