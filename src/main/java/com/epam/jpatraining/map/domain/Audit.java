@@ -3,16 +3,28 @@ package com.epam.jpatraining.map.domain;
 import java.time.LocalDate;
 
 import javax.persistence.Embeddable;
+import javax.persistence.EntityListeners;
+
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Embeddable
+@EntityListeners(AuditingEntityListener.class)
 public class Audit {
 
+	@CreatedDate
 	private LocalDate created;
 
+	@CreatedBy
 	private String createdBy;
-
+	
+	@LastModifiedDate
 	private LocalDate updated;
 	
+	@LastModifiedBy
 	private String updatedBy;
 
 	public LocalDate getCreated() {

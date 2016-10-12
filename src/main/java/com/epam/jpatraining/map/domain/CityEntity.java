@@ -3,12 +3,15 @@ package com.epam.jpatraining.map.domain;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Version;
 
-@Entity(name = "city")
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+@Entity(name = "city")
+@EntityListeners(AuditingEntityListener.class)
 public class CityEntity {
 
 	@Id

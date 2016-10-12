@@ -9,6 +9,8 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.test.annotation.Commit;
 
 import com.epam.jpatraining.AbstractIntegrationTest;
 import com.epam.jpatraining.map.domain.CountyEntity;
@@ -16,8 +18,7 @@ import com.epam.jpatraining.map.domain.Statistics;
 import com.epam.jpatraining.map.service.CountryService;
 import com.google.common.collect.Iterables;
 
-import ch.qos.logback.classic.net.SyslogAppender;
-
+@Commit
 public class CountryServiceIntegrationTest extends AbstractIntegrationTest {
 
 	@Autowired
@@ -37,7 +38,7 @@ public class CountryServiceIntegrationTest extends AbstractIntegrationTest {
 		county.setPopulation(100);
 		county.setSize(100);
 		
-		// When 
+		// When
 		countryService.save(county);
 		// Then
 		Assert.assertEquals("Cannot create entity.", entityManager.find(CountyEntity.class, county.getId()), county);		

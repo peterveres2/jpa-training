@@ -1,5 +1,7 @@
 package com.epam.jpatraining.map.domain;
 
+import java.time.LocalDate;
+
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -10,12 +12,16 @@ import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 import javax.persistence.Version;
 
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Entity(name = "county")
-@Document(collection = "county")
-@EntityListeners(AuditListener.class)
-public class CountyEntity implements Auditable {
+@EntityListeners(AuditingEntityListener.class)
+public class CountyEntity {
 
 
 	@Id
@@ -48,9 +54,18 @@ public class CountyEntity implements Auditable {
 	@Transient
 	private String fullName;
 	
-	@Embedded
-	private Audit audit = new Audit();
+	@CreatedDate
+	private LocalDate created;
 
+	@CreatedBy
+	private String createdBy;
+	
+	@LastModifiedDate
+	private LocalDate updated;
+	
+	@LastModifiedBy
+	private String updatedBy;
+	
 	public long getId() {
 		return id;
 	}
@@ -108,13 +123,7 @@ public class CountyEntity implements Auditable {
 		this.size = size;
 	}
 
-	public Audit getAudit() {
-		return audit;
-	}
-
-	public void setAudit(Audit audit) {
-		this.audit = audit;
-	}
+	
 
 
 	public Integer getVersion() {
@@ -132,11 +141,43 @@ public class CountyEntity implements Auditable {
 		return fullName;
 	}
 
+	
+	public LocalDate getCreated() {
+		return created;
+	}
+
+	public void setCreated(LocalDate created) {
+		this.created = created;
+	}
+
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public LocalDate getUpdated() {
+		return updated;
+	}
+
+	public void setUpdated(LocalDate updated) {
+		this.updated = updated;
+	}
+
+	public String getUpdatedBy() {
+		return updatedBy;
+	}
+
+	public void setUpdatedBy(String updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((audit == null) ? 0 : audit.hashCode());
 		result = prime * result + ((color == null) ? 0 : color.hashCode());
 		result = prime * result + ((fullName == null) ? 0 : fullName.hashCode());
 		result = prime * result + (int) (id ^ (id >>> 32));
@@ -161,13 +202,14 @@ public class CountyEntity implements Auditable {
 			return false;
 		}
 		CountyEntity other = (CountyEntity) obj;
-		if (audit == null) {
-			if (other.audit != null) {
-				return false;
-			}
-		} else if (!audit.equals(other.audit)) {
-			return false;
-		}
+//		if (audit == null) {
+//			if (other.audit != null) {
+//				return false;
+//			}
+//		} else 
+//			if (!audit.equals(other.audit)) {
+//			return false;
+//		}
 		if (color == null) {
 			if (other.color != null) {
 				return false;

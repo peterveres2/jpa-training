@@ -21,12 +21,8 @@ public class CountryService {
 
 	
 	@Transactional
-	public CountyEntity findCountyByOrigIdOrName(String name) {
-		CountyEntity countyEntity = countyRepository.findByOrigId(name);
-		if (countyEntity == null) {			
-			countyEntity = countyRepository.findByName(name);
-		}
-		return countyEntity;
+	public CountyEntity findCountyByOrigIdOrName(String value) {
+		return countyRepository.findByOrigIdOrName(value, value);
 	}
 	
 	public Integer findLargestCounty() {
@@ -36,6 +32,12 @@ public class CountryService {
 	@Transactional
 	public void save(CountyEntity countyEntity) {
 		countyRepository.saveAndFlush(countyEntity);
+		try {
+			Thread.sleep(1500);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 
