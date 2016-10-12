@@ -19,7 +19,7 @@ public class CountyDao {
 	@PersistenceContext
 	private EntityManager entityManager;
 	
-	public void save(CountyEntity county) {
+	public void create(CountyEntity county) {
 		entityManager.persist(county);
 	}
 	

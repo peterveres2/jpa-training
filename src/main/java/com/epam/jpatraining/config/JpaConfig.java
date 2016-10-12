@@ -5,7 +5,6 @@ import java.util.Properties;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
-import org.springframework.beans.factory.FactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
@@ -21,7 +20,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class JpaConfig {
 
 	@Bean
-	public FactoryBean<EntityManagerFactory> entityManagerFactory(DataSource dataSource) {
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
 		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
 		em.setDataSource(dataSource);
 		em.setPackagesToScan(new String[] { "com.epam.jpatraining.map.domain" });
@@ -30,7 +29,7 @@ public class JpaConfig {
 		em.setJpaVendorAdapter(vendorAdapter);
 
 		Properties properties = new Properties();
-		properties.setProperty("hibernate.hbm2ddl.auto", "update");
+		properties.setProperty("hibernate.hbm2ddl.auto", "create");
 		properties.setProperty("hibernate.show_sql", "true");
 		properties.setProperty("hibernate.format_sql", "true");
 		properties.setProperty("hibernate.use_sql_comments", "true");

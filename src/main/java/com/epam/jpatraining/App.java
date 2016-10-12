@@ -5,11 +5,9 @@ import java.sql.SQLException;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
-import org.springframework.oxm.XmlMappingException;
 
-import com.epam.jpatraining.map.service.MapService;
-
-import freemarker.template.TemplateException;
+import com.epam.jpatraining.config.DataSourceConfig;
+import com.epam.jpatraining.map.service.CountryService;
 
 /**
  * Map creator application
@@ -17,27 +15,11 @@ import freemarker.template.TemplateException;
  */
 public class App {
 
-	public static void main(String[] args) throws XmlMappingException, IOException, SQLException, TemplateException {
-		try (AbstractApplicationContext context = new AnnotationConfigApplicationContext(
-				"com.epam.jpatraining.config")) {
+	public static void main(String[] args) throws IOException, SQLException {
+		try (AbstractApplicationContext context = new AnnotationConfigApplicationContext(App.class, DataSourceConfig.class)) {
+			// Business logic starts here...
 
-			MapService mapService = context.getBean(MapService.class);
 
-			mapService.importData();
-
-			mapService.createMap();
-//			CountyEntity bp = mapService.findCountyByOrigIdOrName("Budapest");
-//			bp.setPopulation(bp.getPopulation() + 10);
-//			mapService.update(bp);
-			
-			// System.out.println("Full name: " + bp.getFullName());
-			// System.out.println("Number of path commands: " +
-			// bp.getPathCommands().size());
-			// System.out.println("Find by name: " +
-			// mapService.findCountyByOrigIdOrName("Budapest").getName());
-			// System.out.println("Find by max size: " +
-			// mapService.findLargestCounty());
-			// System.out.println("Statistics: " + mapService.getStatistics());
 		}
 	}
 
