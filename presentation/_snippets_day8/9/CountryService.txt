@@ -1,0 +1,14 @@
+	@Transactional(timeout = 1)
+	public long cityCount() {
+		try {
+			
+			Thread.sleep(1000);
+		}
+		catch (InterruptedException e) {
+			
+		}
+		
+		System.out.println(countyRespository.sayHello());
+		return cityRepository.count();
+	}
+	

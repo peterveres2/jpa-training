@@ -1,0 +1,7 @@
+	@Test
+	public void testFindAllWithPageAble() {
+		PageRequest request = new PageRequest(2, 5, Sort.Direction.ASC, "name"); 
+		Iterable<CountyEntity> result = countryService.findAll(request);
+		System.out.println(result);
+		result.forEach(county -> System.out.println(county.getFullName()));
+	}
